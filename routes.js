@@ -40,17 +40,32 @@ Router.route('/encounters/add', function(){
 }, {name: 'encounters.add'});
 
 Router.route('/encounters/:id', function(){
-    var id = this.params.id;
+    renderEncounterIntoView.call(this, "encounters_view");
+}, {name: 'encounters.view'});
 
-    if(!Meteor.userId())
+Router.route('/encounters/:id/run', function () {
+    renderEncounterIntoView.call(this, "encounters_run");
+}, {name: 'encounters.run'});
+
+function renderEncounterIntoView(view) {
+    var userId = Meteor.userId();
+    var encounterId = this.params.id;
+
+    if (!userHasAccessToEncounter(userId, encounterId))
         return this.redirect('/');
 
-    this.render('encounters_view', {
-        data: function () {
-            var query = {_id: id};
-            var encounter = Encounters.findOne(query);
-            Session.set("currentEncounter", encounter);
-            return encounter;
-        }
-    });
-}, {name: 'encounters.view'});
+    this.render(view, {data: getFindEncounterFunction(encounterId)});
+}
+
+function userHasAccessToEncounter(userId, encounterId) {
+    var encounter = Encounters.findOne({_id: encounterId});
+    return userId && encounter && (encounter.creator === userId || encounter.dungeonMaster === userId || encounter.players.indexOf(userId) >= 0);
+}
+
+function getFindEncounterFunction(id) {
+    return function () {
+        var encounter = Encounters.findOne({_id: id});
+        Session.set("currentEncounter", encounter);
+        return encounter;
+    };
+}
