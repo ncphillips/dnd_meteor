@@ -19,7 +19,8 @@ Template.encounters_view.helpers({
         });
     },
     notStarted: function() { return this.status === "Not Started"; },
-    inProgress; function() { return this.status === "In Progress"; },
+    inProgress: function() { return this.status === "In Progress"; },
+    isDone: function() { return this.status === "Done"; },
     userIsDm: function(){
         var uid = Meteor.userId();
         return uid === this.dungeonMaster;
@@ -51,7 +52,6 @@ Template.encounters_view.events({
     },
     "click .remove-player": function(){
         var encounter = Session.get("currentEncounter");
-        console.log(encounter);
         Encounters.update(encounter._id, {$pull: {players: this._id}});
     },
     "click .add-monster": function(){
@@ -65,11 +65,40 @@ Template.encounters_view.events({
             monsterName: monster.name
         };
 
-        console.log(monsterGenerator);
-
         Encounters.update(this._id, {$push: {monsterGenerators: monsterGenerator}});
     },
     "click #start-encounter": function(){
-        Encounters.update(this._id, {$set: {status: "In Progress"}});
+        var characters = [];
+        this.monsterGenerators.forEach(function(generator){
+            var monster;
+            var monsterTemplate;
+            for (var i=1; i <= generator.count; i++) {
+                monsterTemplate = Monsters.findOne({name: generator.monsterName});
+                monster = $.extend({}, monsterTemplate, {name: [monsterTemplate.name, i].join(" ")});
+                delete monster._id;
+                if (monster.hd) {
+                    //monster.hp = rollHitDie(monster.hd);
+                }
+                monster.max_hp = monster.hp;
+                monster.initiative = rollD20(monster.abilities.str);
+                characters.push(monster);
+            }
+        });
+        Encounters.update(this._id, {$set: {status: "In Progress", characters: characters}});
+
+        var url = '/encounters/' + this._id + '/run';
+        Router.go(url);
     },
+    "click #view-running-encounter": function(){
+        var url = '/encounters/' + this._id + '/run';
+        Router.go(url);
+    }
 });
+
+function rollD20(mod) {
+    return Math.floor(Math.random() * 20) + 1 + mod;
+}
+
+function rollHitDie(hd) {
+    return 1;
+}

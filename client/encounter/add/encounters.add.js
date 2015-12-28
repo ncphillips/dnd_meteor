@@ -4,6 +4,8 @@ Template.encounters_add.events({
         var encounter = {
             name: $("#name").val(),
             status: "Not Started",
+            round: 1,
+            currentPlayerIndex: 0,
             description: $("#description").val(),
             creator: Meteor.userId(),
             dungeonMaster: Meteor.userId(),

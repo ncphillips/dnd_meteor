@@ -1,0 +1,27 @@
+<template name="encounters_run">
+    <h1>{{name}}</h1>
+    <h2>Round: {{round}} <span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Initiative</th>
+            <th>Name</th>
+            <th>Hit Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each characters}}
+            <tr class="{{#if isCurrentCharacter @index}}info{{/if}}">
+                <td>{{initiative}}</td>
+                <td>{{name}}</td>
+                <td>{{hp}}</td>
+                <td>
+                    {{#if isUnconscious hp}}
+                        <span class="label label-danger">Danger</span>
+                    {{/if}}
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</template>
