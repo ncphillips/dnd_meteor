@@ -32,6 +32,9 @@ Template.encounters_view.helpers({
                 return {email: '', _id: ''};
             }
         })
+    },
+    monsterTemplates: function(){
+        return Monsters.find({}, {sort: {name: 1}}).fetch();
     }
 });
 
@@ -44,6 +47,23 @@ Template.encounters_view.events({
         var encounter = Session.get("currentEncounter");
         console.log(encounter);
         Encounters.update(encounter._id, {$pull: {players: this._id}});
-    }
+    },
+    "click .add-monster": function(){
+        var count = $("#num-monsters").val();
+        var monsterName = $("#monster-name").find(":selected").text();
+        var monster = Monsters.findOne({name: monsterName});
 
+        var monsterGenerator = {
+            count: count || 0,
+            monsterId: monster._id,
+            monsterName: monster.name
+        };
+
+        console.log(monsterGenerator);
+
+        Encounters.update(this._id, {$push: {monsterGenerators: monsterGenerator}});
+    },
+    "click #start-encounter": function(){
+        Encounters.update(this._id, {$set: {status: "In Progress"}});
+    },
 });

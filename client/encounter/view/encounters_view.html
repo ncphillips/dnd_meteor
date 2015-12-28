@@ -33,10 +33,43 @@
             {{/if}}
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-3"><b>Characters</b></div>
-        <div class="col-sm-9">
-
-        </div>
+    <div class="">
+        <h3>Monsters</h3>
+        {{#if userIsCreatorOrDm}}
+            <div class="row">
+                <div class="control-group col-sm-4">
+                    <label for="num_monsters">Count</label>
+                    <input type="number" min="1" class="form-control" id="num-monsters"/>
+                </div>
+                <div class="control-group col-sm-4">
+                    <label for="monster-template">Monster</label>
+                    <select id="monster-name" class="form-control">
+                        {{#each monsterTemplates}}
+                            <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="control-group col-sm-4">
+                    <label></label>
+                    <input type="button" class="btn btn-primary btn-sm add-monster form-control" value="Add Monsters">
+                </div>
+            </div>
+        {{/if}}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Count</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each monsterGenerators}}
+                <tr>
+                    <td>{{count}}</td>
+                    <td>{{monsterName}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
     </div>
 </template>
