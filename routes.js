@@ -28,3 +28,10 @@ Router.route('/monsters/:name', function(){
     });
 }, {name: "monsters.view"});
 
+Router.route('/encounters', function(){
+    if (!Meteor.userId())
+        return this.redirect('/');
+
+    this.render('encounters_list');
+}, {name: "encounters.list"});
+

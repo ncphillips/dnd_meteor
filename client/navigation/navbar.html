@@ -16,9 +16,12 @@
                         {{#linkTo route="homepage"}}Home{{/linkTo}}
                     </li>
                     {{# if currentUser}}
-                    <li class="{{#if currentRouteIs "monsters"}}active{{/if}}">
-                        {{#linkTo route="monsters.list"}}Monster Manual{{/linkTo}}
-                    </li>
+                        <li class="{{#if currentRouteIs "encounters"}}active{{/if}}">
+                            {{#linkTo route="encounters.list"}}Encounters{{/linkTo}}
+                        </li>
+                        <li class="{{#if currentRouteIs "monsters"}}active{{/if}}">
+                            {{#linkTo route="monsters.list"}}Monster Manual{{/linkTo}}
+                        </li>
                     {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
