@@ -1,8 +1,3 @@
-Template.monster.onCreated(function(){
-   console.log(this);
-});
-
-
 Template.monster.helpers({
     abilityBonus: function(score){
         return Math.floor((score-10)/2);

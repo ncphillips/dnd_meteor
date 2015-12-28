@@ -35,7 +35,7 @@ Template.list_monster.events({
         Session.set("page", nextPage);
     },
     "click .monster-row": function(){
-        var url = "/" + this.name.replace(" ", "_");
+        var url = "/monsters/" + this.name.replace(" ", "_");
         Router.go(url);
     }
 });
