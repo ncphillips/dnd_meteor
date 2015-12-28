@@ -1,0 +1,21 @@
+<template name="encounters_list">
+    <h1>Encounters</h1>
+    <input type="button" class="btn btn-primary add-encounter" value="Add Encounter"/>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Name</td>
+            <td>Description</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each encounters}}
+            <tr class="encounter-row">
+                <td>{{name}}</td>
+                <td>{{description}}</td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+
+</template>
