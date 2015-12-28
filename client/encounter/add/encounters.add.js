@@ -3,11 +3,13 @@ Template.encounters_add.events({
         event.preventDefault();
         var encounter = {
             name: $("#name").val(),
+            status: "Not Started",
             description: $("#description").val(),
             creator: Meteor.userId(),
             dungeonMaster: Meteor.userId(),
             players: [],
-            characters: []
+            characters: [],
+            monsterGenerators: []
         };
         var id = Encounters.insert(encounter);
         var url = "/encounters/" + id;

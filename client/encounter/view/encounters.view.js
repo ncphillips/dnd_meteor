@@ -18,6 +18,12 @@ Template.encounters_view.helpers({
             }
         });
     },
+    notStarted: function() { return this.status === "Not Started"; },
+    inProgress; function() { return this.status === "In Progress"; },
+    userIsDm: function(){
+        var uid = Meteor.userId();
+        return uid === this.dungeonMaster;
+    },
     userIsCreatorOrDm: function(){
         var uid = Meteor.userId();
         return uid === this.dungeonMaster || uid === this.creator;

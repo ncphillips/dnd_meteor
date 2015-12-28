@@ -5,6 +5,20 @@
         <div class="col-sm-9">{{description}}</div>
     </div>
     <div class="row">
+        <div class="col-sm-3"><b>Status</b></div>
+        <div class="col-sm-9">
+            {{status}}
+            {{#if userIsDm}}
+                {{#if notStarted}}
+                    <span id="start-encounter" class="btn btn-primary pull-right">Start Encounter</span>
+                {{/if}}
+            {{/if}}
+            {{#if inProgress}}
+                <span id="view-running-encounter" class="btn btn-primary pull-right">Start Encounter</span>
+            {{/if}}
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-3"><b>Dungeon Master</b></div>
         <div class="col-sm-9">{{dmEmail}}</div>
     </div>
