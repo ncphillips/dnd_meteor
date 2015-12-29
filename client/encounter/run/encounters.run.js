@@ -1,12 +1,14 @@
 Template.encounters_run.helpers({
     isCurrentCharacter: function(index){
         var encounter = Session.get("currentEncounter");
-        console.log(index, encounter);
         var a = encounter.currentPlayerIndex === index;
         return a;
     },
     isUnconscious: function(hp){
         return hp <= 0;
+    },
+    currentCharacter: function(){
+        return this.characters[this.currentPlayerIndex];
     }
 });
 
