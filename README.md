@@ -5,7 +5,7 @@ game play during live play sessions of [Dungeons and Dragons, 5th Edition](http:
 
 The purpose of this app is to help the game master keep track of and find
 information needed while running D&D 5e sessions. 
-
+t
 ## Features
 ### Encounters
 * Define encounter
