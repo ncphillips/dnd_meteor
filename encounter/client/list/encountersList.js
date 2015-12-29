@@ -1,12 +1,12 @@
 encounterQuery = {};
 
-Template.encounters_list.helpers({
+Template.encountersList.helpers({
     encounters: function(){
         return Encounters.find(encounterQuery).fetch();
     }
 });
 
-Template.encounters_list.events({
+Template.encountersList.events({
     "click .add-encounter": function(){
         Router.go("encounters.add");
     },

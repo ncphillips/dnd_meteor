@@ -1,4 +1,4 @@
-Template.encounters_add.events({
+Template.encountersAdd.events({
     "submit .new-encounter": function (event) {
         event.preventDefault();
         var encounter = {

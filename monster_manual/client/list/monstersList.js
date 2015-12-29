@@ -3,7 +3,7 @@ numPerPage = 15;
 Session.set("monster-query",{source: "A MM"});
 Session.set("page", 0);
 
-Template.list_monster.helpers({
+Template.monstersList.helpers({
     pageNum: function(){
         return Session.get("page") + 1;
     },
@@ -17,7 +17,7 @@ Template.list_monster.helpers({
     }
 });
 
-Template.list_monster.events({
+Template.monstersList.events({
     "submit": function(e){
         e.preventDefault();
         var query = Session.get("monster-query");

@@ -1,4 +1,4 @@
-Template.encounters_run.helpers({
+Template.encountersRun.helpers({
     isCurrentCharacter: function(index){
         var encounter = Session.get("currentEncounter");
         var a = encounter.currentPlayerIndex === index;
@@ -12,7 +12,7 @@ Template.encounters_run.helpers({
     }
 });
 
-Template.encounters_run.events({
+Template.encountersRun.events({
     "click #next-turn": function(){
         var index = this.currentPlayerIndex + 1;
         var round = this.round;

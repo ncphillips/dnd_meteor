@@ -1,4 +1,4 @@
-Template.encounters_view.helpers({
+Template.encountersView.helpers({
     dmEmail: function(){
         var dm = Meteor.users.findOne({_id: this.dungeonMaster});
         if (dm) {
@@ -45,7 +45,7 @@ Template.encounters_view.helpers({
     }
 });
 
-Template.encounters_view.events({
+Template.encountersView.events({
     "click .add-player": function(){
         var newPlayer = $("#new-player").find(":selected").val();
         Encounters.update(this._id, {$push: {players: newPlayer}});

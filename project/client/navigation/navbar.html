@@ -17,10 +17,10 @@
                     </li>
                     {{# if currentUser}}
                         <li class="{{#if currentRouteIs "encounters"}}active{{/if}}">
-                            {{#linkTo route="encounters.list"}}Encounters{{/linkTo}}
+                            {{#linkTo route="encountersList"}}Encounters{{/linkTo}}
                         </li>
                         <li class="{{#if currentRouteIs "monsters"}}active{{/if}}">
-                            {{#linkTo route="monsters.list"}}Monster Manual{{/linkTo}}
+                            {{#linkTo route="monstersList"}}Monster Manual{{/linkTo}}
                         </li>
                     {{/if}}
                 </ul>
