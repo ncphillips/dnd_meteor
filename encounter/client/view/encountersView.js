@@ -84,14 +84,13 @@ Template.encountersView.events({
                 characters.push(monster);
             }
         });
+
         Encounters.update(this._id, {$set: {status: "In Progress", characters: characters}});
 
-        var url = '/encounters/' + this._id + '/run';
-        Router.go(url);
+        Router.go('encountersRun', {id: this._id});
     },
     "click #view-running-encounter": function(){
-        var url = '/encounters/' + this._id + '/run';
-        Router.go(url);
+        Router.go('encountersRun', {id: this._id});
     }
 });
 

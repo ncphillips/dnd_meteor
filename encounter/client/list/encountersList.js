@@ -7,11 +7,7 @@ Template.encountersList.helpers({
 });
 
 Template.encountersList.events({
-    "click .add-encounter": function(){
-        Router.go("encounters.add");
-    },
     "click .encounter-row": function(){
-        var url = "/encounters/" + this._id;
-        Router.go(url)
+        Router.go("encountersView", {id: this._id});
     }
 });

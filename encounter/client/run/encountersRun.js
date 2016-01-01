@@ -1,8 +1,7 @@
 Template.encountersRun.helpers({
     isCurrentCharacter: function(index){
         var encounter = Session.get("currentEncounter");
-        var a = encounter.currentPlayerIndex === index;
-        return a;
+        return encounter.currentPlayerIndex === index;
     },
     isUnconscious: function(hp){
         return hp <= 0;

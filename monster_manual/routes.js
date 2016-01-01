@@ -1,7 +1,7 @@
 Router.route('/monsters', { name: 'monstersList' });
 
 Router.route('/monsters/:name', {
-    name: 'monsterView',
+    name: 'monstersView',
     data: function () {
         var name = this.params.name;
         var query = {name: name.replace('_', ' ')};

@@ -16,6 +16,9 @@
                         {{#linkTo route="homepage"}}Home{{/linkTo}}
                     </li>
                     {{# if currentUser}}
+                        <li class="{{#if currentRouteIs "campaigns"}}active{{/if}}">
+                            {{#linkTo route="campaignsList"}}Campaigns{{/linkTo}}
+                        </li>
                         <li class="{{#if currentRouteIs "encounters"}}active{{/if}}">
                             {{#linkTo route="encountersList"}}Encounters{{/linkTo}}
                         </li>
