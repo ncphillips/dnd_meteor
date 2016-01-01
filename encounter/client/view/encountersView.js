@@ -24,8 +24,12 @@ Template.encountersView.helpers({
             }
         });
     },
-    notStarted: function() { return this.status === "Not Started"; },
-    inProgress: function() { return this.status === "In Progress"; },
+    notStarted: function() {
+        return this.encounter && this.encounter.status === "Not Started";
+    },
+    inProgress: function() {
+        return this.encounter && this.encounter.status === "In Progress";
+    },
     isDone: function() { return this.status === "Done"; },
     userIsDm: function(){
         if (!this.campaign) {
@@ -80,7 +84,7 @@ Template.encountersView.events({
             monsterName: monster.name
         };
 
-        Encounters.update(this._id, {$push: {monsterGenerators: monsterGenerator}});
+        Encounters.update(this.encounter._id, {$push: {monsterGenerators: monsterGenerator}});
     },
     "click #start-encounter": function(){
         var characters = [];
@@ -100,12 +104,12 @@ Template.encountersView.events({
             }
         });
 
-        Encounters.update(this._id, {$set: {status: "In Progress", characters: characters}});
+        Encounters.update(this.encounter._id, {$set: {status: "In Progress", characters: characters}});
 
-        Router.go('encountersRun', {id: this._id});
+        Router.go('encountersRun', Router.current().params);
     },
     "click #view-running-encounter": function(){
-        Router.go('encountersRun', {id: this._id});
+        Router.go('encountersRun', Router.current().params);
     }
 });
 

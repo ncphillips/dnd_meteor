@@ -20,12 +20,20 @@ Router.route('/campaigns/:campaignId/encounters/add', {
 Router.route('/campaigns/:campaignId/encounters/:encounterId', {
     name: 'encountersView',
     data: function(){
-        var d = {
+        return {
             campaign: Campaigns.findOne(this.params.campaignId),
             encounter: Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId})
         };
+    }
+});
 
-        return d;
+Router.route('/campaigns/:campaignId/encounters/:encounterId/run', {
+    name: 'encountersRun',
+    data: function(){
+        return {
+            campaign: Campaigns.findOne(this.params.campaignId),
+            encounter: Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId})
+        };
     }
 });
 

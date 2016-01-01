@@ -1,8 +1,8 @@
 <template name="encountersRun">
-    <h1>{{name}}</h1>
+    <h1>{{encounter.name}}</h1>
     <div class="row">
         <div class="col-sm-6">
-            <h2>Round: {{round}} <span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
+            <h2>Round: {{encounter.round}} <span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
             <table class="table">
                 <thead>
                 <tr>
@@ -12,7 +12,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                {{#each characters}}
+                {{#each encounter.characters}}
                     <tr class="{{#if isCurrentCharacter @index}}info{{/if}}">
                         <td>{{initiative}}</td>
                         <td>{{name}}</td>
