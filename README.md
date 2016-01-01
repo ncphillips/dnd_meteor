@@ -7,26 +7,62 @@ The purpose of this app is to help the game master keep track of and find
 information needed while running D&D 5e sessions. 
 t
 ## Features
+__Current Features__ are already implemented.
+
+__Upcoming Features__ will definitely be implemented soon.
+
+__Possible Features__ are ideas that have come up, but it's yet clear if they fit with the project's goal of facilitating gameplay
+
+### Campaigns
+__Current Features__
+
+__Upcoming Features__
+
+* Create new campaigns
+* Invite others to be players in your campaign
+** Initially this will be a drop-down to make this easier, but as the app expands it will switch to a text field.
+
+__Possible Features__
+
 ### Encounters
-* Define encounter
-* Decide what monsters will be in the fight
-* Rolls enemy health and initiative.
-* Keeps track of enemy health.
-* Tracks rounds and turns.
-* Tracks timed effects.
-* Automatically bring up current characters sheet.
+__Current Features__
 
-### Players
-__TODO: Detailed description of the Players app.__
+* You decide how many and what types of monsters will be in the fight
+* It rolls the enemy health and initiative for you
+* It keeps track of enemy health, and you tell it how much to heal/damage the enemy.
+* It tracks rounds and turns, you just tell it when a turn is over
+* Create timed and recurring effects, and it will notify you when they should pop up.
+* Automatically displays the current character's stats.
 
-* A fillable character sheet for Players in a campaign
+__Upcoming Features__
 
+* Add encounters to campaigns
+
+__Possible Features__
+
+### The Party
+__Current Features__
+
+__Upcoming Features__
+
+* (Upcoming Feature) Keep a list of all the PCs in the campaing.
+* (Upcoming Feature) Fill out a character sheet for each PC.
+
+__Possible Features__
+
+* Track party gear/loot.
+* Party members can create notes about the campaing.
+* Share files with party members. 
 
 ### Monster Manual
-__TODO: Detailed description of the Monster Manual app.__
 
-* A list of monster tempaltes.
+__Current Features__
 
+* A list of pre-defined, non-editable monster templates.
+
+__Upcoming Features__
+
+__Possible Features__
 
 ## Issue Tracking
 
