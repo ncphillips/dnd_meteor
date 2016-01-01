@@ -2,6 +2,7 @@ Template.encountersAdd.events({
     "submit .new-encounter": function (event) {
         event.preventDefault();
         var encounter = {
+            campaign: this.campaign._id,
             name: $("#name").val(),
             status: "Not Started",
             round: 1,
@@ -13,8 +14,9 @@ Template.encountersAdd.events({
             characters: [],
             monsterGenerators: []
         };
+
         var id = Encounters.insert(encounter);
-        var url = "/encounters/" + id;
-        Router.go(url);
+
+        Router.go("encountersView", this.campaign._id, id);
     }
 });

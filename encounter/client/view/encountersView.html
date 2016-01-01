@@ -1,13 +1,13 @@
 <template name="encountersView">
-    <h1>{{name}}</h1>
+    <h1>{{encounter.name}}</h1>
     <div class="row">
         <div class="col-sm-3"><b>Description</b></div>
-        <div class="col-sm-9">{{description}}</div>
+        <div class="col-sm-9">{{encounter.description}}</div>
     </div>
     <div class="row">
         <div class="col-sm-3"><b>Status</b></div>
         <div class="col-sm-9">
-            {{status}}
+            {{encounter.status}}
             {{#if userIsDm}}
                 {{#if notStarted}}
                     <span id="start-encounter" class="btn btn-primary pull-right">Start Encounter</span>
@@ -53,7 +53,7 @@
             <div class="row">
                 <div class="control-group col-sm-4">
                     <label for="num_monsters">Count</label>
-                    <input type="number" min="1" class="form-control" id="num-monsters"/>
+                    <input type="number" min="1" class="form-control" id="num-monsters" value="1"/>
                 </div>
                 <div class="control-group col-sm-4">
                     <label for="monster-template">Monster</label>
@@ -77,7 +77,7 @@
             </tr>
             </thead>
             <tbody>
-            {{#each monsterGenerators}}
+            {{#each encounter.monsterGenerators}}
                 <tr>
                     <td>{{count}}</td>
                     <td>{{monsterName}}</td>

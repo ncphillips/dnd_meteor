@@ -1,6 +1,10 @@
+Template.encountersView.onCreated(function(){
+    console.log(this);
+});
+
 Template.encountersView.helpers({
     dmEmail: function(){
-        var dm = Meteor.users.findOne({_id: this.dungeonMaster});
+        var dm = Meteor.users.findOne({_id: this.campaign.dungeonMaster});
         if (dm) {
             return dm.emails[0].address;
         }
@@ -9,7 +13,7 @@ Template.encountersView.helpers({
         if (!this.players)
             return [];
 
-        var players = Meteor.users.find({_id: {$in: this.players}});
+        var players = Meteor.users.find({_id: {$in: this.encounter.players}});
         return players.map(function(player){
             if (player){
                 return {email: player.emails[0].address, _id: player._id};
@@ -22,15 +26,13 @@ Template.encountersView.helpers({
     inProgress: function() { return this.status === "In Progress"; },
     isDone: function() { return this.status === "Done"; },
     userIsDm: function(){
-        var uid = Meteor.userId();
-        return uid === this.dungeonMaster;
+        return Meteor.userId() === this.campaign.dungeonMaster;
     },
     userIsCreatorOrDm: function(){
-        var uid = Meteor.userId();
-        return uid === this.dungeonMaster || uid === this.creator;
+        return Meteor.userId() === this.campaign.dungeonMaster || Meteor.userId() === this.encounter.creator;
     },
     potentialPlayers: function(){
-        var potentialPlayerIds = $.extend([], this.players, [this.dungeonMaster], [this.creator]);
+        var potentialPlayerIds = $.extend([], this.encounter.players, [this.campaign.dungeonMaster], [this.encounter.creator]);
         var users = Meteor.users.find({_id: {$nin: potentialPlayerIds}}).fetch();
         return users.map(function(user){
             if (user){
@@ -48,7 +50,7 @@ Template.encountersView.helpers({
 Template.encountersView.events({
     "click .add-player": function(){
         var newPlayer = $("#new-player").find(":selected").val();
-        Encounters.update(this._id, {$push: {players: newPlayer}});
+        Encounters.update(this.encounter._id, {$push: {players: newPlayer}});
     },
     "click .remove-player": function(){
         var encounter = Session.get("currentEncounter");
@@ -69,7 +71,7 @@ Template.encountersView.events({
     },
     "click #start-encounter": function(){
         var characters = [];
-        this.monsterGenerators.forEach(function(generator){
+        this.encounter.monsterGenerators.forEach(function(generator){
             var monster;
             var monsterTemplate;
             for (var i=1; i <= generator.count; i++) {

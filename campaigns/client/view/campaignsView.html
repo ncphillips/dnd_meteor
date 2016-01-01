@@ -3,5 +3,7 @@
     <div>
         {{campaign.description}}
     </div>
-    {{> encountersList }}
+    <a href="/campaigns/{{campaign._id}}/encounters">
+        <span class="btn btn-primary">Encounters</span>
+    </a>
 </template>

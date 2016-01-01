@@ -1,8 +1,8 @@
 <template name="encountersList">
     <h1>Encounters</h1>
-    {{#linkTo route="encountersAdd"}}
-        <span class="btn btn-primary">Add Encounter</span>
-    {{/linkTo}}
+    <a href="/campaigns/{{campaign._id}}/encounters/add" class="btn btn-primary">
+        Add Encounter
+    </a>
     <table class="table table-striped">
         <thead>
         <tr>
