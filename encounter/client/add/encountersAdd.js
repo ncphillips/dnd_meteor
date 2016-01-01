@@ -17,6 +17,6 @@ Template.encountersAdd.events({
 
         var id = Encounters.insert(encounter);
 
-        Router.go("encountersView", this.campaign._id, id);
+        Router.go("encountersView", {campaignId: this.campaign._id, encounterId: id});
     }
 });

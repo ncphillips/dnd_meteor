@@ -25,7 +25,6 @@ Router.route('/campaigns/:campaignId/encounters/:encounterId', {
             encounter: Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId})
         };
 
-        console.log(d);
         return d;
     }
 });

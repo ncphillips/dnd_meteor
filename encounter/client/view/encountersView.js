@@ -4,13 +4,15 @@ Template.encountersView.onCreated(function(){
 
 Template.encountersView.helpers({
     dmEmail: function(){
-        var dm = Meteor.users.findOne({_id: this.campaign.dungeonMaster});
-        if (dm) {
-            return dm.emails[0].address;
+        if (this.campaign){
+            var dm = Meteor.users.findOne({_id: this.campaign.dungeonMaster});
+            if(dm){
+                return dm.emails[0].address;
+            }
         }
     },
     playerEmails: function(){
-        if (!this.players)
+        if (!this.encounter)
             return [];
 
         var players = Meteor.users.find({_id: {$in: this.encounter.players}});
@@ -26,14 +28,25 @@ Template.encountersView.helpers({
     inProgress: function() { return this.status === "In Progress"; },
     isDone: function() { return this.status === "Done"; },
     userIsDm: function(){
+        if (!this.campaign) {
+            return false;
+        }
         return Meteor.userId() === this.campaign.dungeonMaster;
     },
     userIsCreatorOrDm: function(){
+        if (!this.campaign) {
+            return false;
+        }
         return Meteor.userId() === this.campaign.dungeonMaster || Meteor.userId() === this.encounter.creator;
     },
     potentialPlayers: function(){
-        var potentialPlayerIds = $.extend([], this.encounter.players, [this.campaign.dungeonMaster], [this.encounter.creator]);
-        var users = Meteor.users.find({_id: {$nin: potentialPlayerIds}}).fetch();
+        if (!this.encounter || !this.campaign) {
+            return false;
+        }
+
+        console.log(this.encounter.players, this.campaign.dungeonMaster, this.encounter.creator);
+        var players = $.merge([], this.encounter.players, [this.campaign.dungeonMaster], [this.encounter.creator]);
+        var users = Meteor.users.find({_id: {$nin: players}}).fetch();
         return users.map(function(user){
             if (user){
                 return {email: user.emails[0].address, _id: user._id};
@@ -53,8 +66,8 @@ Template.encountersView.events({
         Encounters.update(this.encounter._id, {$push: {players: newPlayer}});
     },
     "click .remove-player": function(){
-        var encounter = Session.get("currentEncounter");
-        Encounters.update(encounter._id, {$pull: {players: this._id}});
+        var encounterId = Router.current().params.encounterId;
+        Encounters.update(encounterId, {$pull: {players: this._id}});
     },
     "click .add-monster": function(){
         var count = $("#num-monsters").val();
