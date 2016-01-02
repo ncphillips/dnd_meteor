@@ -1,4 +1,10 @@
 Template.campaignsView.helpers({
+    numEncounters: function(){
+        return Encounters.find({campaign: this.campaign._id}).count();
+    },
+    numPlayerCharacters: function(){
+        return PlayerCharacters.find({campaign: this.campaign._id}).count();
+    },
     urlData: function(){
         return {
             id: this.campaign._id
