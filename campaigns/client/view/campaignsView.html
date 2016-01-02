@@ -1,36 +1,47 @@
 <template name="campaignsView">
     {{> breadcrumbs crumbs}}
     <h1>{{ campaign.name }}</h1>
-    <div>
-        {{campaign.description}}
-    </div>
-    <a href="/campaigns/{{campaign._id}}/encounters">
-        <span class="btn btn-primary">Encounters</span>
-    </a>
-    <a href="/campaigns/{{campaign._id}}/playerCharacters">
-        <span class="btn btn-primary">Player Characters</span>
-    </a>
     <div class="row">
-        <div class="col-sm-3"><b>Players</b></div>
-        <div class="col-sm-9">
-            <ul>
+        <div class="col-sm-5">
+            <h2>Description</h2>
+            {{campaign.description}}
+        </div>
+        <div class="col-sm-3">
+            <h2>Links</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation">
+                    <a href="/campaigns/{{campaign._id}}/encounters">
+                        <span class="">Encounters</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/campaigns/{{campaign._id}}/playerCharacters">
+                        <span class="">Player Characters</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h2>Players</h2>
+            <ul class="list-group">
                 {{#each playerEmails}}
-                    <li>
+                    <li class="list-group-item clearfix">
                         {{email}}
-                        <span class="btn btn-danger remove-player">X</span>
+                        <span class="btn btn-danger btn-sm remove-player pull-right">Remove</span>
                     </li>
                 {{/each}}
             </ul>
             {{#if userIsCreatorOrDm}}
-                <div class="form-inline">
-                    <div class="control-group">
-                        <select id="new-player" class="form-control">
-                            {{#each potentialPlayers}}
-                                <option value="{{_id}}">{{email}}</option>
-                            {{/each}}
-                        </select>
-                        <input type="button" class="btn btn-default btn-sm add-player" value="Add Player">
-                    </div>
+                <div class="control-group">
+                    <select id="new-player" class="form-control">
+                        {{#each potentialPlayers}}
+                            <option value="{{_id}}">{{email}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            <br/>
+                <div class="control-group">
+                    <input type="button" class="btn btn-info btn-sm btn-block add-player" value="Add Player">
                 </div>
             {{/if}}
         </div>
