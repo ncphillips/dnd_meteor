@@ -5,7 +5,7 @@ game play during live play sessions of [Dungeons and Dragons, 5th Edition](http:
 
 The purpose of this app is to help the game master keep track of and find
 information needed while running D&D 5e sessions. 
-t
+
 ## Features
 __Current Features__ are already implemented.
 
@@ -16,11 +16,12 @@ __Possible Features__ are ideas that have come up, but it's yet clear if they fi
 ### Campaigns
 __Current Features__
 
+* Create new campaigns
+* Add other Users as players in your campaign
+
 __Upcoming Features__
 
-* Create new campaigns
-* Invite others to be players in your campaign
-** Initially this will be a drop-down to make this easier, but as the app expands it will switch to a text field.
+* User must know the players email when adding them to the campaign, and the list will not be provided.
 
 __Possible Features__
 
@@ -33,20 +34,22 @@ __Current Features__
 * It tracks rounds and turns, you just tell it when a turn is over
 * Create timed and recurring effects, and it will notify you when they should pop up.
 * Automatically displays the current character's stats.
+* Add encounters to campaigns
 
 __Upcoming Features__
 
-* Add encounters to campaigns
 
 __Possible Features__
 
 ### The Party
 __Current Features__
 
+* Keep a list of all the PCs in the campaing.
+
 __Upcoming Features__
 
-* (Upcoming Feature) Keep a list of all the PCs in the campaing.
-* (Upcoming Feature) Fill out a character sheet for each PC.
+* Add new PCs to the game.
+* View a PCs sheet.
 
 __Possible Features__
 
@@ -61,6 +64,8 @@ __Current Features__
 * A list of pre-defined, non-editable monster templates.
 
 __Upcoming Features__
+
+* Report problems with a particular monster's details.
 
 __Possible Features__
 
