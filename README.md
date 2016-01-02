@@ -25,6 +25,8 @@ __Upcoming Features__
 
 __Possible Features__
 
+_None yet..._
+
 ### Encounters
 __Current Features__
 
@@ -38,8 +40,11 @@ __Current Features__
 
 __Upcoming Features__
 
+_None yet..._
 
 __Possible Features__
+
+_None yet..._
 
 ### The Party
 __Current Features__
@@ -68,6 +73,8 @@ __Upcoming Features__
 * Report problems with a particular monster's details.
 
 __Possible Features__
+
+_None yet..._
 
 ## Issue Tracking
 
