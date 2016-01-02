@@ -16,3 +16,13 @@ Router.route("/campaigns/:campaignId/playerCharacters/add", {
         }
     }
 });
+
+Router.route("/campaigns/:campaignId/playerCharacters/:pcId", {
+    name: 'playerCharactersView',
+    data: function(){
+        return {
+            campaign: Campaigns.findOne(this.params.campaignId),
+            playerCharacter: PlayerCharacters.findOne(this.params.pcId)
+        }
+    }
+});
