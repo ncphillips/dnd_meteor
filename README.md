@@ -31,13 +31,14 @@ _None yet..._
 ### Encounters
 __Current Features__
 
-* You decide how many and what types of monsters will be in the fight
-* It rolls the enemy's initiative for you
-* It tracks rounds and turns, you just tell it when a turn is over
-* Automatically displays the current character's stats.
-* Add encounters to campaigns
+* Create encounters for your campaign ahead of time.
+* You decide how many and what types of monsters will be in the fight.
 * Maintains initiative order.
-* Track health, and heal/damage the characters. This never exceeds max health or drop below zero.
+* Automatically rolls the enemy's initiative
+* Keeps track of whose turn it is, and what round you're on.
+* Skips dead character's turns.
+* Tracks character's health, deal damage or heal them, and makes sure they don't go below zero or above their max.
+* Automatically displays the current character's stats.
 
 __Upcoming Features__
 
