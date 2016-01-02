@@ -11,7 +11,9 @@ Template.encountersRun.helpers({
     },
     currentCharacter: function(){
         if (this.encounter){
-            return this.encounter.characters[this.encounter.currentPlayerIndex];
+            var index = this.encounter.currentPlayerIndex;
+            var io = getInitativeOrder(this.encounter);
+            return io[index];
         } else {
             return {};
         }
