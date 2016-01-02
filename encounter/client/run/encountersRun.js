@@ -48,6 +48,13 @@ Template.encountersRun.events({
 
             var damage = e.target.value;
             console.log("Dealt " + damage + " damage to " + this.name);
+            var newHealth = this.hp - damage;
+            if (newHealth >= this.max_hp) {
+                newHealth = this.max_hp;
+            } else if (newHealth < 0) {
+                newHealth = 0;
+            }
+            Characters.update(this._id, {$set: {hp: newHealth}});
         }
     }
 });

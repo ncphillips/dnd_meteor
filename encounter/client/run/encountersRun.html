@@ -11,6 +11,7 @@
                     <th>Name</th>
                     <th>HP</th>
                     <th>Deal Damage</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -19,13 +20,16 @@
                         <td>{{initiative}}</td>
                         <td>
                             {{name}}
-                            {{#if isUnconscious hp}}
-                                <span class="label label-danger">Danger</span>
-                            {{/if}}
+
                         </td>
                         <td>{{hp}}</td>
                         <td class="form-inline">
                             <input class="deal-damage form-control" type="number">
+                        </td>
+                        <td>
+                            {{#if isUnconscious hp}}
+                                <span class="label label-danger">Unconscious</span>
+                            {{/if}}
                         </td>
                     </tr>
                 {{/each}}

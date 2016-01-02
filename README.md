@@ -36,13 +36,14 @@ __Current Features__
 * It tracks rounds and turns, you just tell it when a turn is over
 * Automatically displays the current character's stats.
 * Add encounters to campaigns
+* Maintains initiative order.
+* Track health, and heal/damage the characters. This never exceeds max health or drop below zero.
 
 __Upcoming Features__
 
 * Edit an existing Encounter
 * Select which players should be in the encounter and manually set their initiative.
 * It rolls the enemy's health based on their Hit Die.
-* It keeps track of enemy health, and you tell it how much to heal/damage the enemy.
 * Create timed and recurring effects, and it will notify you when they should pop up.
 
 __Possible Features__
