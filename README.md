@@ -31,16 +31,17 @@ _None yet..._
 __Current Features__
 
 * You decide how many and what types of monsters will be in the fight
-* It rolls the enemy health and initiative for you
-* It keeps track of enemy health, and you tell it how much to heal/damage the enemy.
+* It rolls the enemy's initiative for you
 * It tracks rounds and turns, you just tell it when a turn is over
-* Create timed and recurring effects, and it will notify you when they should pop up.
 * Automatically displays the current character's stats.
 * Add encounters to campaigns
 
 __Upcoming Features__
 
-_None yet..._
+* Select which players should be in the encounter and manually set their initiative.
+* It rolls the enemy's health based on their Hit Die.
+* It keeps track of enemy health, and you tell it how much to heal/damage the enemy.
+* Create timed and recurring effects, and it will notify you when they should pop up.
 
 __Possible Features__
 
