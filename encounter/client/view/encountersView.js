@@ -61,6 +61,15 @@ Template.encountersView.helpers({
     },
     monsterTemplates: function(){
         return Monsters.find({}, {sort: {name: 1}}).fetch();
+    },
+    crumbs: function(){
+        var campaignId = this.campaign._id;
+        var campaignName = this.campaign.name;
+        return {breadcrumbs: [
+            {text: "Campaigns", name: "campaignsList", data: {}},
+            {text: campaignName,  name: "campaignsView", data: {campaignId: campaignId}},
+            {text: "Encounters", name: "encountersList", data: {campaignId: campaignId}}
+        ]};
     }
 });
 

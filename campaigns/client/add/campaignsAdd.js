@@ -1,3 +1,11 @@
+Template.campaignsAdd.helpers({
+    crumbs: function(){
+        return {breadcrumbs: [
+            {text: "Campaigns", name: "campaignsList", data: {}}
+        ]};
+    }
+});
+
 Template.campaignsAdd.events({
     "submit .new-campaign": function (event) {
         event.preventDefault();

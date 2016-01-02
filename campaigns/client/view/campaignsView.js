@@ -51,6 +51,13 @@ Template.campaignsView.helpers({
                 return {};
             }
         });
+    },
+    crumbs: function(){
+        var campaignId = this.campaign._id;
+        var campaignName = this.campaign.name;
+        return {breadcrumbs: [
+            {text: "Campaigns", name: "campaignsList", data: {}},
+        ]};
     }
 });
 

@@ -12,6 +12,18 @@ Template.encountersRun.helpers({
         } else {
             return {};
         }
+    },
+    crumbs: function(){
+        var campaignId = this.campaign._id;
+        var campaignName = this.campaign.name;
+        var encounterId = this.encounter._id;
+        var encounterName = this.encounter.name;
+        return {breadcrumbs: [
+            {text: "Campaigns", name: "campaignsList", data: {}},
+            {text: campaignName,  name: "campaignsView", data: {campaignId: campaignId}},
+            {text: "Encounters", name: "encountersList", data: {campaignId: campaignId}},
+            {text: encounterName,  name: "encountersView", data: {campaignId: campaignId, encounterId: encounterId}}
+        ]};
     }
 });
 

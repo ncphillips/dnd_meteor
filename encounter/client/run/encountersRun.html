@@ -1,5 +1,6 @@
 <template name="encountersRun">
-    <h1>{{encounter.name}}</h1>
+    {{> breadcrumbs crumbs}}
+    <h1>{{encounter.name}} Initiative Order</h1>
     <div class="row">
         <div class="col-sm-6">
             <h2>Round: {{encounter.round}} <span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>

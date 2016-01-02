@@ -16,5 +16,10 @@ Template.monstersView.helpers({
         if (languages) {
             return languages.join(", ");
         }
+    },
+    crumbs: function(){
+        return {breadcrumbs: [
+            {text: "Monster Manual", name: "monstersList"}
+        ]};
     }
 });
