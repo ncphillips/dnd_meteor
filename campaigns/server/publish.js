@@ -1,6 +1,13 @@
 Meteor.publish("campaigns", function(){
-    if (this.userId) {
-        return Campaigns.find({});
+    var userId = this.userId;
+    if (userId) {
+        return Campaigns.find({
+            $or: [
+                { creator: userId },
+                { dungeonMaster: userId },
+                { players: userId }
+            ]
+        });
     } else {
         this.ready();
     }
