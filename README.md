@@ -21,6 +21,7 @@ __Current Features__
 
 __Upcoming Features__
 
+* Edit an existing campaign
 * User must know the players email when adding them to the campaign, and the list will not be provided.
 
 __Possible Features__
@@ -38,6 +39,7 @@ __Current Features__
 
 __Upcoming Features__
 
+* Edit an existing Encounter
 * Select which players should be in the encounter and manually set their initiative.
 * It rolls the enemy's health based on their Hit Die.
 * It keeps track of enemy health, and you tell it how much to heal/damage the enemy.
@@ -56,6 +58,7 @@ __Current Features__
 __Upcoming Features__
 
 * View a PCs sheet.
+* Edit an existing PC
 
 __Possible Features__
 
