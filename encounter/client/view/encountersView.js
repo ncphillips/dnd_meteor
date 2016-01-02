@@ -11,19 +11,6 @@ Template.encountersView.helpers({
             }
         }
     },
-    playerEmails: function(){
-        if (!this.encounter)
-            return [];
-
-        var players = Meteor.users.find({_id: {$in: this.encounter.players}});
-        return players.map(function(player){
-            if (player){
-                return {email: player.emails[0].address, _id: player._id};
-            } else{
-                return {};
-            }
-        });
-    },
     notStarted: function() {
         return this.encounter && this.encounter.status === "Not Started";
     },
@@ -43,22 +30,6 @@ Template.encountersView.helpers({
         }
         return Meteor.userId() === this.campaign.dungeonMaster || Meteor.userId() === this.encounter.creator;
     },
-    potentialPlayers: function(){
-        if (!this.encounter || !this.campaign) {
-            return false;
-        }
-
-        console.log(this.encounter.players, this.campaign.dungeonMaster, this.encounter.creator);
-        var players = $.merge([], this.encounter.players, [this.campaign.dungeonMaster], [this.encounter.creator]);
-        var users = Meteor.users.find({_id: {$nin: players}}).fetch();
-        return users.map(function(user){
-            if (user){
-                return {email: user.emails[0].address, _id: user._id};
-            } else {
-                return {email: '', _id: ''};
-            }
-        })
-    },
     monsterTemplates: function(){
         return Monsters.find({}, {sort: {name: 1}}).fetch();
     },
@@ -74,10 +45,6 @@ Template.encountersView.helpers({
 });
 
 Template.encountersView.events({
-    "click .add-player": function(){
-        var newPlayer = $("#new-player").find(":selected").val();
-        Encounters.update(this.encounter._id, {$push: {players: newPlayer}});
-    },
     "click .remove-player": function(){
         var encounterId = Router.current().params.encounterId;
         Encounters.update(encounterId, {$pull: {players: this._id}});
@@ -96,23 +63,16 @@ Template.encountersView.events({
         Encounters.update(this.encounter._id, {$push: {monsterGenerators: monsterGenerator}});
     },
     "click #start-encounter": function(){
+        // Generate Monsters
         var characters = [];
         this.encounter.monsterGenerators.forEach(function(generator){
-            var monster;
-            var monsterTemplate;
-            for (var i=1; i <= generator.count; i++) {
-                monsterTemplate = Monsters.findOne({name: generator.monsterName});
-                monster = $.extend({}, monsterTemplate, {name: [monsterTemplate.name, i].join(" ")});
-                delete monster._id;
-                if (monster.hd) {
-                    //monster.hp = rollHitDie(monster.hd);
-                }
-                monster.max_hp = monster.hp;
-                monster.initiative = rollD20(monster.abilities.str);
-                characters.push(monster);
-            }
+            characters = $.merge(characters, generateMonsters(generator));
         });
 
+        // Add Players
+        characters = $.merge(characters, loadPlayerCharacters(this.campaign));
+
+        // Update Status
         Encounters.update(this.encounter._id, {$set: {status: "In Progress", characters: characters}});
 
         Router.go('encountersRun', Router.current().params);
@@ -128,4 +88,26 @@ function rollD20(mod) {
 
 function rollHitDie(hd) {
     return 1;
+}
+
+function generateMonsters(generator){
+    var monsters = [];
+    var monster;
+    var monsterTemplate;
+    for (var i=1; i <= generator.count; i++) {
+        monsterTemplate = Monsters.findOne({name: generator.monsterName});
+        monster = $.extend({}, monsterTemplate, {name: [monsterTemplate.name, i].join(" ")});
+        delete monster._id;
+        if (monster.hd) {
+            //monster.hp = rollHitDie(monster.hd);
+        }
+        monster.max_hp = monster.hp;
+        monster.initiative = rollD20(monster.abilities.str);
+        monsters.push(monster);
+    }
+    return monsters;
+}
+
+function loadPlayerCharacters(campaign) {
+    return PlayerCharacters.find({campaign: campaign._id}).fetch();
 }
