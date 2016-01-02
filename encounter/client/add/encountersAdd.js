@@ -21,7 +21,7 @@ Template.encountersAdd.events({
             description: $("#description").val(),
             creator: Meteor.userId(),
             dungeonMaster: Meteor.userId(),
-            players: [],
+            players: Characters.find({campaign: this.campaign._id}).fetch().map(function(pc){return pc._id;}),
             characters: [],
             monsterGenerators: []
         };
@@ -31,3 +31,5 @@ Template.encountersAdd.events({
         Router.go("encountersView", {campaignId: this.campaign._id, encounterId: id});
     }
 });
+
+

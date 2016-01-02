@@ -23,6 +23,18 @@
         <div class="col-sm-3"><b>Dungeon Master</b></div>
         <div class="col-sm-9">{{dmEmail}}</div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3>Characters</h3>
+            <div class="list-group">
+                {{#each players}}
+                    <div class="list-group-item">
+                        {{name}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
     <div class="">
         <h3>Monsters</h3>
         {{#if userIsCreatorOrDm}}

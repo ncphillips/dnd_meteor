@@ -11,6 +11,11 @@ Template.encountersView.helpers({
             }
         }
     },
+    players: function(){
+        var any = Characters.find({_id: {$in: this.encounter.players}}).fetch();
+        console.log(any);
+        return any;
+    },
     notStarted: function() {
         return this.encounter && this.encounter.status === "Not Started";
     },
@@ -70,7 +75,7 @@ Template.encountersView.events({
         });
 
         // Add Players
-        characters = $.merge(characters, loadPlayerCharacters(this.campaign));
+        characters = $.merge(characters, loadPlayerCharacters(this.encounter));
 
         // Update Status
         Encounters.update(this.encounter._id, {$set: {status: "In Progress", characters: characters}});
@@ -110,8 +115,8 @@ function generateMonsters(generator){
     return monsterIds;
 }
 
-function loadPlayerCharacters(campaign) {
-    var characters = Characters.find({campaign: campaign._id, playerCharacter: true}).fetch();
+function loadPlayerCharacters(encounter) {
+    var characters = Characters.find({_id: {$in: encounter.players}}).fetch();
     return characters.map(function(pc){
         return pc._id;
     });
