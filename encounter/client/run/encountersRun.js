@@ -1,4 +1,7 @@
 Template.encountersRun.helpers({
+    time: function(){
+        return (this.encounter.round * 6) + " seconds";
+    },
     isCurrentCharacter: function(index){
         var encounter = Encounters.findOne(Router.current().params.encounterId);
         return encounter.currentPlayerIndex === index;
@@ -14,7 +17,7 @@ Template.encountersRun.helpers({
         }
     },
     characters: function(){
-        return Characters.find({_id: {$in: this.encounter.characters}}, {sort: {initiative: -1}}).fetch();
+        return getInitativeOrder(this.encounter);
     },
     crumbs: function(){
         var campaignId = this.campaign._id;
@@ -34,10 +37,37 @@ Template.encountersRun.events({
     "click #next-turn": function(){
         var index = this.encounter.currentPlayerIndex + 1;
         var round = this.encounter.round;
+
+        var io = getInitativeOrder(this.encounter);
+
+        // End of list, go to next round.
         if (index >= this.encounter.characters.length) {
             index = 0;
             round++;
         }
+
+        // If next character is dead, go to next next...
+        var listLoopCount = 0;
+        var nextCharacter = io[index];
+        try{
+            while(nextCharacter.hp <= 0){
+                index++;
+                nextCharacter = io[index];
+                // Try to not get stuck in the look.
+                if(index >= this.encounter.characters.length){
+                    listLoopCount++;
+                    if(listLoopCount > 1){
+                        console.log("Fucking infinite loops man");
+                        break;
+                    }
+                }
+
+                nextCharacter = io[index]
+            }
+        } catch (e) {
+            $("#everyone-is-dead").modal("show");
+        }
+
         Encounters.update(this.encounter._id, {$set: {currentPlayerIndex: index, round: round}})
     },
     "keypress .deal-damage": function(e){
@@ -58,3 +88,7 @@ Template.encountersRun.events({
         }
     }
 });
+
+function getInitativeOrder(encounter) {
+    return Characters.find({_id: {$in: encounter.characters}}, {sort: {initiative: -1}}).fetch();
+}

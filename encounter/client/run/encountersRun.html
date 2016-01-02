@@ -3,7 +3,7 @@
     <h1>{{encounter.name}} Initiative Order</h1>
     <div class="row">
         <div class="col-sm-6">
-            <h2>Round: {{encounter.round}} <span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
+            <h2>Round: {{encounter.round}} <small>{{time}}</small><span id="next-turn" class="btn btn-default pull-right">Next Turn</span></h2>
             <table class="table">
                 <thead>
                 <tr>
@@ -42,5 +42,22 @@
             {{/with}}
         </div>
     </div>
+
+    <div id="everyone-is-dead" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Everyone is Dead</h4>
+                </div>
+                <div class="modal-body">
+                    <p>It seems there has been a TPK. Better luck next time :P</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 </template>
