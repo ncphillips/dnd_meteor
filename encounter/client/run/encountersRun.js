@@ -85,6 +85,7 @@ Template.encountersRun.events({
                 newHealth = 0;
             }
             Characters.update(this._id, {$set: {hp: newHealth}});
+            e.target.value = null;
         }
     }
 });
