@@ -39,11 +39,12 @@ __Current Features__
 * Skips dead character's turns.
 * Tracks character's health, deal damage or heal them, and makes sure they don't go below zero or above their max.
 * Automatically displays the current character's stats.
+* Select which players should be in the encounter and manually set their initiative.
 
 __Upcoming Features__
 
 * Edit an existing Encounter
-* Select which players should be in the encounter and manually set their initiative.
+* Manually set character's initiative.
 * It rolls the enemy's health based on their Hit Die.
 * Create timed and recurring effects, and it will notify you when they should pop up.
 

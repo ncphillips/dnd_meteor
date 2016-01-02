@@ -1,7 +1,3 @@
-Template.encountersView.onCreated(function(){
-    console.log(this);
-});
-
 Template.encountersView.helpers({
     dmEmail: function(){
         if (this.campaign){
@@ -11,10 +7,11 @@ Template.encountersView.helpers({
             }
         }
     },
-    players: function(){
-        var any = Characters.find({_id: {$in: this.encounter.players}}).fetch();
-        console.log(any);
-        return any;
+    playerCharacters: function(){
+        return Characters.find({_id: {$in: this.encounter.playerCharacters}}).fetch();
+    },
+    potentialPlayerCharacters: function(){
+        return Characters.find({_id: {$nin: this.encounter.playerCharacters}, campaign: this.campaign._id}).fetch();
     },
     notStarted: function() {
         return this.encounter && this.encounter.status === "Not Started";
@@ -50,9 +47,13 @@ Template.encountersView.helpers({
 });
 
 Template.encountersView.events({
-    "click .remove-player": function(){
+    "click .remove-player-character": function(){
         var encounterId = Router.current().params.encounterId;
-        Encounters.update(encounterId, {$pull: {players: this._id}});
+        Encounters.update(encounterId, {$pull: {playerCharacters: this._id}});
+    },
+    "click .add-player-character": function(){
+        var newPC = $("#new-player-character").find(":selected").val();
+        Encounters.update(this.encounter._id, {$push: {playerCharacters: newPC}});
     },
     "click .add-monster": function(){
         var count = $("#num-monsters").val();
@@ -116,7 +117,7 @@ function generateMonsters(generator){
 }
 
 function loadPlayerCharacters(encounter) {
-    var characters = Characters.find({_id: {$in: encounter.players}}).fetch();
+    var characters = Characters.find({_id: {$in: encounter.playerCharacters}}).fetch();
     return characters.map(function(pc){
         return pc._id;
     });

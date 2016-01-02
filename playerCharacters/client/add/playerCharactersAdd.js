@@ -4,7 +4,7 @@ Template.playerCharactersAdd.helpers({
             return [];
         }
 
-        var users = Meteor.users.find({_id: {$in: this.campaign.players}}).fetch();
+        var users = Meteor.users.find({_id: {$in: this.campaign.playerCharacters}}).fetch();
         return users.map(function(user){
             if (user){
                 return {email: user.emails[0].address, _id: user._id};

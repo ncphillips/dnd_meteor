@@ -27,7 +27,7 @@ Template.campaignsView.helpers({
             return [];
         }
 
-        var players = $.merge([], this.campaign.players, [this.campaign.dungeonMaster], [this.campaign.creator]);
+        var players = $.merge([], this.campaign.playerCharacters, [this.campaign.dungeonMaster], [this.campaign.creator]);
         var users = Meteor.users.find({_id: {$nin: players}}).fetch();
         return users.map(function(user){
             if (user){
@@ -49,7 +49,7 @@ Template.campaignsView.helpers({
         if (!this.campaign)
             return [];
 
-        var players = Meteor.users.find({_id: {$in: this.campaign.players}});
+        var players = Meteor.users.find({_id: {$in: this.campaign.playerCharacters}});
         return players.map(function(player){
             if (player){
                 return {email: player.emails[0].address, _id: player._id};
