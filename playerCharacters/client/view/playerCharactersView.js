@@ -1,5 +1,9 @@
 Template.playerCharactersView.helpers({
     crumbs: function(){
+        if (!this.campaign) {
+            return {breadcrumbs: []};
+        }
+
         var campaignId = this.campaign._id;
         var text = this.campaign.name;
         return {breadcrumbs: [

@@ -36,6 +36,7 @@ Template.playerCharactersAdd.events({
             classLevel: $("#character-class-level").val(),
             race: $("#character-race").val(),
             hp_max: $("#character-hp-max").val(),
+            playerCharacter: true,
             senses: {
                 passive: $("#character-passive-perception").val()
             },
@@ -44,9 +45,8 @@ Template.playerCharactersAdd.events({
             background: $("#character-background").val()
         };
 
-        var pcId = PlayerCharacters.insert(playerCharacter);
-        //urlParams.pcId = pcId;
-        //Router.go('playerCharactersView', urlParams);
-        Router.go('playerCharactersList', urlParams);
+        var pcId = Characters.insert(playerCharacter);
+        urlParams.pcId = pcId;
+        Router.go('playerCharactersView', urlParams);
     }
 });

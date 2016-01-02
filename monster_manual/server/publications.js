@@ -1,6 +1,6 @@
-Meteor.publish("monsters", function(){
+Meteor.publish("monsterTemplates", function(){
     if (this.userId) {
-        return Monsters.find({});
+        return MonsterTemplates.find({});
     } else {
         this.ready();
     }

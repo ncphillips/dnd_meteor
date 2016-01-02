@@ -3,7 +3,7 @@ Router.route("/campaigns/:campaignId/playerCharacters", {
     data: function(){
         return {
             campaign: Campaigns.findOne(this.params.campaignId),
-            playerCharacters: PlayerCharacters.find({campaign: this.params.campaignId}).fetch()
+            playerCharacters: Characters.find({campaign: this.params.campaignId, playerCharacter: true}).fetch()
         }
     }
 });
@@ -22,7 +22,7 @@ Router.route("/campaigns/:campaignId/playerCharacters/:pcId", {
     data: function(){
         return {
             campaign: Campaigns.findOne(this.params.campaignId),
-            playerCharacter: PlayerCharacters.findOne(this.params.pcId)
+            playerCharacter: Characters.findOne(this.params.pcId)
         }
     }
 });

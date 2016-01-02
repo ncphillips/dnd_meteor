@@ -3,7 +3,7 @@ Template.campaignsView.helpers({
         return Encounters.find({campaign: this.campaign._id}).count();
     },
     numPlayerCharacters: function(){
-        return PlayerCharacters.find({campaign: this.campaign._id}).count();
+        return Characters.find({campaign: this.campaign._id, playerCharacter: true}).count();
     },
     urlData: function(){
         return {

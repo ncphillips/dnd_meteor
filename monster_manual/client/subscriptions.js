@@ -1,1 +1,1 @@
-Meteor.subscribe("monsters");
+Meteor.subscribe("monsterTemplates");

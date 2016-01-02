@@ -5,6 +5,6 @@ Router.route('/monsters/:name', {
     data: function () {
         var name = this.params.name;
         var query = {name: name.replace('_', ' ')};
-        return Monsters.findOne(query);
+        return MonsterTemplates.findOne(query);
     }
 });

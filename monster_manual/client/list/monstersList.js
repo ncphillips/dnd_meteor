@@ -13,7 +13,7 @@ Template.monstersList.helpers({
             limit: numPerPage,
             skip: Session.get("page") * numPerPage
         };
-        return Monsters.find(Session.get("monster-query"), options).fetch();
+        return MonsterTemplates.find(Session.get("monster-query"), options).fetch();
     }
 });
 

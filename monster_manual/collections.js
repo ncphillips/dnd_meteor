@@ -1,1 +1,1 @@
-Monsters = new Mongo.Collection("monsters");
+MonsterTemplates = new Mongo.Collection("monsterTemplates");

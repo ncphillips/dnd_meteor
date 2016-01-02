@@ -31,7 +31,7 @@ Template.encountersView.helpers({
         return Meteor.userId() === this.campaign.dungeonMaster || Meteor.userId() === this.encounter.creator;
     },
     monsterTemplates: function(){
-        return Monsters.find({}, {sort: {name: 1}}).fetch();
+        return MonsterTemplates.find({}, {sort: {name: 1}}).fetch();
     },
     crumbs: function(){
         var campaignId = this.campaign._id;
@@ -52,7 +52,7 @@ Template.encountersView.events({
     "click .add-monster": function(){
         var count = $("#num-monsters").val();
         var monsterName = $("#monster-name").find(":selected").text();
-        var monster = Monsters.findOne({name: monsterName});
+        var monster = MonsterTemplates.findOne({name: monsterName});
 
         var monsterGenerator = {
             count: count || 0,
@@ -95,7 +95,7 @@ function generateMonsters(generator){
     var monster;
     var monsterTemplate;
     for (var i=1; i <= generator.count; i++) {
-        monsterTemplate = Monsters.findOne({name: generator.monsterName});
+        monsterTemplate = MonsterTemplates.findOne({name: generator.monsterName});
         monster = $.extend({}, monsterTemplate, {name: [monsterTemplate.name, i].join(" ")});
         delete monster._id;
         if (monster.hd) {
@@ -109,5 +109,5 @@ function generateMonsters(generator){
 }
 
 function loadPlayerCharacters(campaign) {
-    return PlayerCharacters.find({campaign: campaign._id}).fetch();
+    return Characters.find({campaign: campaign._id, playerCharacter: true}).fetch();
 }

@@ -1,1 +1,1 @@
-PlayerCharacters = new Mongo.Collection("playerCharacters");
+Characters = new Mongo.Collection("characters");
