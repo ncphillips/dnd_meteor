@@ -91,7 +91,7 @@ function rollHitDie(hd) {
 }
 
 function generateMonsters(generator){
-    var monsters = [];
+    var monsterIds = [];
     var monster;
     var monsterTemplate;
     for (var i=1; i <= generator.count; i++) {
@@ -103,11 +103,16 @@ function generateMonsters(generator){
         }
         monster.max_hp = monster.hp;
         monster.initiative = rollD20(monster.abilities.str);
-        monsters.push(monster);
+        monster.playerCharacater = false;
+        monster.destroyAfterEncounter = true;
+        monsterIds.push(Characters.insert(monster));
     }
-    return monsters;
+    return monsterIds;
 }
 
 function loadPlayerCharacters(campaign) {
-    return Characters.find({campaign: campaign._id, playerCharacter: true}).fetch();
+    var characters = Characters.find({campaign: campaign._id, playerCharacter: true}).fetch();
+    return characters.map(function(pc){
+        return pc._id;
+    });
 }

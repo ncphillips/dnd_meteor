@@ -13,6 +13,9 @@ Template.encountersRun.helpers({
             return {};
         }
     },
+    characters: function(){
+        return Characters.find({_id: {$in: this.encounter.characters}}).fetch();
+    },
     crumbs: function(){
         var campaignId = this.campaign._id;
         var campaignName = this.campaign.name;
