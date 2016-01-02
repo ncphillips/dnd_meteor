@@ -14,7 +14,7 @@ Template.encountersRun.helpers({
         }
     },
     characters: function(){
-        return Characters.find({_id: {$in: this.encounter.characters}}).fetch();
+        return Characters.find({_id: {$in: this.encounter.characters}}, {sort: {initiative: -1}}).fetch();
     },
     crumbs: function(){
         var campaignId = this.campaign._id;
