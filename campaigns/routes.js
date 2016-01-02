@@ -9,11 +9,11 @@ Router.route("/campaigns", {
 
 Router.route("/campaigns/add", {name: "campaignsAdd"});
 
-Router.route("/campaigns/:id", {
+Router.route("/campaigns/:campaignId", {
     name: "campaignsView",
     data: function () {
         return {
-            campaign: Campaigns.find(this.params.id).fetch()[0]
+            campaign: Campaigns.find(this.params.campaignId).fetch()[0]
         };
     }
 });
