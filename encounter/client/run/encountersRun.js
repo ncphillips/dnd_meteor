@@ -87,6 +87,18 @@ Template.encountersRun.events({
             Characters.update(this._id, {$set: {hp: newHealth}});
             e.target.value = null;
         }
+    },
+    "keypress .pc-initiative": function(e){
+        var ENTER_CODE = 13;
+
+        if (e.keyCode === ENTER_CODE) {
+            e.preventDefault();
+
+            var initiative = e.target.value;
+            console.log("Set initiative of " + this.name+ " to " + initiative);
+
+            Characters.update(this._id, {$set: {initiative: initiative}});
+        }
     }
 });
 
