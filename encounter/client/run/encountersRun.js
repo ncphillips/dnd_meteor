@@ -36,5 +36,15 @@ Template.encountersRun.events({
             round++;
         }
         Encounters.update(this.encounter._id, {$set: {currentPlayerIndex: index, round: round}})
+    },
+    "keypress .deal-damage": function(e){
+        var ENTER_CODE = 13;
+
+        if (e.keyCode === ENTER_CODE) {
+            e.preventDefault();
+
+            var damage = e.target.value;
+            console.log("Dealt " + damage + " damage to " + this.name);
+        }
     }
 });

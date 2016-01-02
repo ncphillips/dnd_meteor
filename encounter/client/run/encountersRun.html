@@ -7,21 +7,25 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th>Initiative</th>
+                    <th>Init</th>
                     <th>Name</th>
-                    <th>Hit Points</th>
+                    <th>HP</th>
+                    <th>Deal Damage</th>
                 </tr>
                 </thead>
                 <tbody>
                 {{#each encounter.characters}}
                     <tr class="{{#if isCurrentCharacter @index}}info{{/if}}">
                         <td>{{initiative}}</td>
-                        <td>{{name}}</td>
-                        <td>{{hp}}</td>
                         <td>
+                            {{name}}
                             {{#if isUnconscious hp}}
                                 <span class="label label-danger">Danger</span>
                             {{/if}}
+                        </td>
+                        <td>{{hp}}</td>
+                        <td class="form-inline">
+                            <input class="deal-damage form-control" type="number">
                         </td>
                     </tr>
                 {{/each}}
