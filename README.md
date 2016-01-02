@@ -46,14 +46,14 @@ __Possible Features__
 
 _None yet..._
 
-### The Party
+### Player Characters 
 __Current Features__
 
-* Keep a list of all the PCs in the campaing.
+* Keep a list of all the PCs in the campaign.
+* Add new PCs to the game.
 
 __Upcoming Features__
 
-* Add new PCs to the game.
 * View a PCs sheet.
 
 __Possible Features__

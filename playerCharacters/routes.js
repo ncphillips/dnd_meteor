@@ -2,8 +2,8 @@ Router.route("/campaigns/:campaignId/playerCharacters", {
     name: 'playerCharactersList',
     data: function(){
         return {
-            campaigns: Campaigns.find({}),
-            playerCharacters: PlayerCharacters.find({})
+            campaign: Campaigns.findOne(this.params.campaignId),
+            playerCharacters: PlayerCharacters.find({campaign: this.params.campaignId}).fetch()
         }
     }
 });
@@ -12,7 +12,7 @@ Router.route("/campaigns/:campaignId/playerCharacters/add", {
     name: 'playerCharactersAdd',
     data: function(){
         return {
-            campaigns: Campaigns.find({})
+            campaign: Campaigns.findOne(this.params.campaignId)
         }
     }
 });
