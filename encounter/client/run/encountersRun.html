@@ -33,7 +33,7 @@
                                 <span class="label label-danger">Unconscious</span>
                             {{/if}}
                             {{#each statusEffects}}
-                                <p>{{name}} - {{rounds}}</p>
+                                <p  class="status-effect" data-toggle="tooltip" data-placement="left" title="{{description}}"><b>{{name}}</b>  <i>{{rounds}}</i></p>
                             {{/each}}
                             <span class="btn btn-sm btn-default add-status">Add Status</span>
                         </td>
@@ -74,7 +74,8 @@
                     <h4 class="modal-title">Add Status Effect</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Here is where a new status effect will be.</p>
+                    <p>Describe a new status effect.</p>
+                    <p>Note: Currently Game Master only supports status effects that end on the start of the turn of the character it is effecting..</p>
 
                     <div class="control-group">
                         <label for="new-status-name">Name</label>

@@ -71,6 +71,19 @@ Template.encountersRun.events({
         }
 
         Encounters.update(this.encounter._id, {$set: {currentPlayerIndex: index, round: round}})
+
+        // Loop through statuses and decrement rounds. Delete if rounds === 0
+        var updatedStatusEffeects = [];
+        var statusEffects = nextCharacter.statusEffects || [];
+
+        statusEffects.forEach(function(status){
+            status.rounds--;
+            if (status.rounds > 0) {
+                updatedStatusEffeects.push(status);
+            }
+        });
+
+        Characters.update(nextCharacter._id, {$set: {statusEffects: updatedStatusEffeects}});
     },
     "keypress .deal-damage": function(e){
         var ENTER_CODE = 13;
@@ -97,8 +110,6 @@ Template.encountersRun.events({
             e.preventDefault();
 
             var initiative = e.target.value;
-            console.log("Set initiative of " + this.name+ " to " + initiative);
-
             Characters.update(this._id, {$set: {initiative: initiative}});
         }
     },
@@ -118,6 +129,12 @@ Template.encountersRun.events({
 
         $("#add-status-effect-modal").modal("hide");
     }
+});
+
+Template.encountersRun.onRendered(function(){
+    $('body').tooltip({
+        selector: '[data-toggle=tooltip]'
+    });
 });
 
 function getInitativeOrder(encounter) {
