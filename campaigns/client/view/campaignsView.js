@@ -1,6 +1,6 @@
 Template.campaignsView.helpers({
     numEncounters: function(){
-        return Encounters.find({campaign: this.campaign._id}).count();
+        return Encounters.find({campaign: this.campaign._id, status: {$not: "Complete"}}).count();
     },
     numPlayerCharacters: function(){
         return Characters.find({campaign: this.campaign._id, playerCharacter: true}).count();
