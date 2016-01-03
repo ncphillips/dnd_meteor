@@ -101,6 +101,22 @@ Template.encountersRun.events({
 
             Characters.update(this._id, {$set: {initiative: initiative}});
         }
+    },
+    "click .add-status": function(){
+        $("#add-status-effect-modal").modal("show");
+        Session.set("setStatusOnCharacter", this._id);
+    },
+    "click .save-status": function(){
+        var status = {
+            name: $("#new-status-name").val(),
+            rounds: $("#new-status-rounds").val(),
+            description: $("#new-status-description").val()
+        };
+
+        var cid = Session.get("setStatusOnCharacter");
+        Characters.update(cid, {$push: {statusEffects: status}});
+
+        $("#add-status-effect-modal").modal("hide");
     }
 });
 
