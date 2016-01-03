@@ -41,12 +41,13 @@ __Current Features__
 * Automatically displays the current character's stats.
 * Select which players should be in the encounter.
 * Manually set any character's initiative.
+* Add status effects to characters that disappear after a set number of rounds.
 
 __Upcoming Features__
 
 * Edit an existing Encounter
 * It rolls the enemy's health based on their Hit Die.
-* Create timed and recurring effects, and it will notify you when they should pop up.
+* Create recurring events (e.g. attempt to put fire out or take damage), and display notice when they should take place.
 
 __Possible Features__
 
