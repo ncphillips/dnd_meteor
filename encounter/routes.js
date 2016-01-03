@@ -29,6 +29,14 @@ Router.route('/campaigns/:campaignId/encounters/:encounterId', {
 
 Router.route('/campaigns/:campaignId/encounters/:encounterId/run', {
     name: 'encountersRun',
+    onBeforeAction: function(){
+        var encounter = Encounters.findOne(this.params.encounterId, {campaign: this.params.campaignId});
+        if (encounter.status === 'In Progress') {
+            this.next();
+        } else {
+            this.redirect('encountersView', this.params);
+        }
+    },
     data: function(){
         return {
             campaign: Campaigns.findOne(this.params.campaignId),

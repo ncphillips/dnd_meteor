@@ -128,6 +128,12 @@ Template.encountersRun.events({
         Characters.update(cid, {$push: {statusEffects: status}});
 
         $("#add-status-effect-modal").modal("hide");
+    },
+    "click #end-encounter": function(e){
+        console.log("End combat");
+        // todo: calculate xp
+
+        Encounters.update(this.encounter._id, {$set: {status: "Complete"}});
     }
 });
 
