@@ -1,6 +1,6 @@
 numPerPage = 15;
 
-Session.set("monster-query",{source: "A MM"});
+Session.set("monster-query",{});
 Session.set("page", 0);
 
 Template.monstersList.helpers({
@@ -9,7 +9,7 @@ Template.monstersList.helpers({
     },
     monsters: function(){
         var options = {
-            sort: {page: 1},
+            sort: {source: 1, page: 1},
             limit: numPerPage,
             skip: Session.get("page") * numPerPage
         };
