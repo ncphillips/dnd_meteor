@@ -110,7 +110,7 @@ Template.encountersRun.events({
             e.preventDefault();
 
             var initiative = e.target.value;
-            Characters.update(this._id, {$set: {initiative: initiative}});
+            Characters.update(this._id, {$set: {initiative: initiative-0}});
         }
     },
     "click .add-status": function(){
