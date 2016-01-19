@@ -48,6 +48,8 @@ __Upcoming Features__
 * Edit an existing Encounter
 * It rolls the enemy's health based on their Hit Die.
 * Create recurring events (e.g. attempt to put fire out or take damage), and display notice when they should take place.
+* Add new monsters from templates during encounter
+* Add new characters during encounter
 
 __Possible Features__
 
