@@ -14,39 +14,82 @@ Template.playerCharactersAdd.helpers({
         })
     },
     crumbs: function(){
-        var campaignId = this.campaign._id;
-        var text = this.campaign.name;
-        return {breadcrumbs: [
-            {text: "Campaigns", name: "campaignsList", data: {}},
-            {text: text,  name: "campaignsView", data: {campaignId: campaignId}},
-            {text: "Players", name: "playerCharactersList", data: {campaignId: campaignId}}
-        ]};
+        if (this.campaign){
+            var campaignId = this.campaign._id;
+            var text = this.campaign.name;
+            return {
+                breadcrumbs: [{
+                    text: "Campaigns",
+                    name: "campaignsList",
+                    data: {}
+                }, {
+                    text: text,
+                    name: "campaignsView",
+                    data: {campaignId: campaignId}
+                }, {
+                    text: "Player Characters",
+                    name: "playerCharactersList",
+                    data: {campaignId: campaignId}
+                }]
+            };
+        } else {
+            return [];
+        }
     }
 });
 
 Template.playerCharactersAdd.events({
-    "submit .add-player-character": function(e){
+    "click .add-player-character": function(e){
         e.preventDefault();
 
         var urlParams = Router.current().params;
 
         var playerCharacter = {
-            name: $("#character-name").val(),
-            player: $('#character-player').val(),
+            name: $("#name").val(),
+            player: $('#character-player :selected').val(),
             classLevel: $("#character-class-level").val(),
             race: $("#character-race").val(),
-            hp_max: $("#character-hp-max").val(),
+            hp_max: $("#hp-max").val(),
             playerCharacter: true,
+            size: $("#size").val(),
+            ac: $("#ac").val(),
+            abilities: {
+                abr: $("#ab_str").val(),
+                dex: $("#ab_dex").val(),
+                con: $("#ab_con").val(),
+                wis: $("#ab_wis").val(),
+                int: $("#ab_int").val(),
+                cha: $("#ab_cha").val()
+            },
+            savingThrows: {
+                str: $("#st_str").val(),
+                dex: $("#st_dex").val(),
+                con: $("#st_con").val(),
+                wis: $("#st_wis").val(),
+                int: $("#st_int").val(),
+                cha: $("#st_cha").val()
+            },
+            speed: {
+                walk: $("#speed_walk").val(),
+                burrow: $("#speed_burrow").val(),
+                climb: $("#speed_climb").val(),
+                fly: $("#speed_fly").val(),
+                swim: $("#speed_swim").val()
+            },
             senses: {
-                passive: $("#character-passive-perception").val()
+                passive: $("#senses_passive").val(),
+                darkvision: $("#senses_darkvision").val(),
+                tremorsense: $("#senses_tremorsense").val(),
+                blindsight: $("#senses_blindsight").val(),
+                truesight: $("#senses_truesight").val()
             },
             campaign: urlParams.campaignId,
             description: $("#character-description").val(),
             background: $("#character-background").val()
         };
+        console.log(playerCharacter);
 
-        var pcId = Characters.insert(playerCharacter);
-        urlParams.pcId = pcId;
+        urlParams.pcId = Characters.insert(playerCharacter);
         Router.go('playerCharactersView', urlParams);
     }
 });
