@@ -8,10 +8,16 @@ Template.encountersView.helpers({
         }
     },
     playerCharacters: function(){
-        return Characters.find({_id: {$in: this.encounter.playerCharacters}}).fetch();
+        if (this.encounter) {
+            return Characters.find({_id: {$in: this.encounter.playerCharacters}}).fetch();
+        }
+        return [];
     },
     potentialPlayerCharacters: function(){
-        return Characters.find({_id: {$nin: this.encounter.playerCharacters}, campaign: this.campaign._id}).fetch();
+        if (this.encounter) {
+            return Characters.find({_id: {$nin: this.encounter.playerCharacters}, campaign: this.campaign._id}).fetch();
+        }
+        return [];
     },
     notStarted: function() {
         return this.encounter && this.encounter.status === "Not Started";
